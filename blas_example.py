@@ -19,12 +19,12 @@ if __name__ == '__main__':
     beta = 3.
 
     """
-    alpha*dot(A,B) + beta
+    alpha*dot(A,B) + beta*C
     """
     dgemm(A, B, C, alpha, beta)
     print(C)
-    print(alpha*np.dot(A, B)+beta)
-
+    C = np.zeros((2, 2))
+    print(alpha * np.dot(A, B) + beta * C)
 
     A = np.random.rand(500, 400).astype('f8')
     B = np.random.rand(400, 300).astype('f8')
@@ -40,9 +40,6 @@ if __name__ == '__main__':
         C2 = np.dot(A, B)
         t10 = time() - t1
 
-        times.append(t10/t00)
+        times.append(t10 / t00)
 
     print('Average speedup after 200 runs %f' % np.array(times).mean())
-
-
-

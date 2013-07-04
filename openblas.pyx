@@ -4,7 +4,7 @@ cimport numpy as cnp
 
 ctypedef int blasint 
 
-cdef extern from "cblas.h":
+cdef extern from "cblas.h" nogil:
     enum CBLAS_ORDER:
         CblasRowMajor, CblasColMajor
     enum CBLAS_TRANSPOSE:
@@ -26,12 +26,10 @@ cdef extern from "cblas.h":
                      blasint ldc)
 
 
-def dgemm(cnp.ndarray[double, ndim=2] A,
-          cnp.ndarray[double, ndim=2] B,
-          cnp.ndarray[double, ndim=2] C, 
-          double alpha=1.0,
-          double beta=0.0):
-
+def dgemm(cnp.ndarray[double, ndim=2] A, cnp.ndarray[double, ndim=2] B,
+          cnp.ndarray[double, ndim=2] C, double alpha=1.0, double beta=0.0):
+    """ C = alpha*dot(A,B) + beta*C
+    """
 
     cdef double * a = <double *> A.data
     cdef double * b = <double *> B.data
@@ -45,7 +43,8 @@ def dgemm(cnp.ndarray[double, ndim=2] A,
         int ldb = N
         int ldc = N
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, 
+    with nogil:
+        cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, 
                 alpha, a, lda, b, ldb, beta, c, ldc)
 
     
