@@ -26,33 +26,27 @@ cdef extern from "cblas.h":
                      blasint ldc)
 
 
-def test_dgemm(cnp.ndarray[double, ndim=2] a,
-               cnp.ndarray[double, ndim=2] b,
-               cnp.ndarray[double, ndim=2] c):
+def dgemm(cnp.ndarray[double, ndim=2] A,
+          cnp.ndarray[double, ndim=2] B,
+          cnp.ndarray[double, ndim=2] C, 
+          double alpha=1.0,
+          double beta=0.0):
 
 
-    cdef double * A = <double *> a.data
-    cdef double * B = <double *> b.data
-    cdef double * C = <double *> c.data
+    cdef double * a = <double *> A.data
+    cdef double * b = <double *> B.data
+    cdef double * c = <double *> C.data
 
-    cdef int i
+    cdef:
+        int M = A.shape[0]
+        int N = B.shape[1]
+        int K = B.shape[0]
+        int lda = K
+        int ldb = N
+        int ldc = N
 
-    for i in range(200):
-
-        cblas_dgemm(CblasRowMajor,
-              CblasNoTrans, 
-              CblasNoTrans,
-              2,
-              2,
-              2,
-              1.0, 
-              A, 
-              2,
-              B,
-              2,
-              0.0, 
-              C,
-              2)
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, 
+                alpha, a, lda, b, ldb, beta, c, ldc)
 
     
 
