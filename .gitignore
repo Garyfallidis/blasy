@@ -1,0 +1,7 @@
+*.c
+*.f
+*.dat
+*.html
+*.so*
+OpenBLAS/*.h
+build/
