@@ -1,5 +1,5 @@
 import numpy as np
-from openblas import dgemm
+from openblas import dgemm, ddot
 from time import time
 """
 For OpenBlas
@@ -12,15 +12,28 @@ Check for include and library directories
 
 if __name__ == '__main__':
 
+    """
+    Level 1 example
+    """
+
+    a = np.array([0, 1, 2, 3], 'f8')
+    b = np.array([0, 2, 3, 4], 'f8')
+    print(a)
+    print(b)
+    print(ddot(a, b))
+    
+    """
+    Level 3
+    alpha*dot(A,B) + beta*C
+    """
+
     A = np.array([[0, 1, 2], [3, 4, 5]], dtype='f8')
     B = np.array([[0, 1], [2, 3], [4, 5]], dtype='f8')
     C = np.zeros((2, 2))
     alpha = 2.
     beta = 3.
 
-    """
-    alpha*dot(A,B) + beta*C
-    """
+
     dgemm(A, B, C, alpha, beta)
     print(C)
     C = np.zeros((2, 2))
