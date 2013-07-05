@@ -3,5 +3,6 @@
 *.dat
 *.html
 *.so*
+*.pyc
 OpenBLAS/*.h
 build/
