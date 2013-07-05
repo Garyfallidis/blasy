@@ -1,7 +1,7 @@
 Blasy
 =====
 
-My need for speed is increasing. Experimenting with OpenBLAS in Python was never such a fun.
+My need for speed is increasing. Experimenting with OpenBLAS in Python was never such fun.
 
 
 Install
