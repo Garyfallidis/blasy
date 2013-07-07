@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.testing import *
-from openblas import dgemm, ddot
+from blasy.openblas import dgemm, ddot
 
 
 def test_ddot():
