@@ -9,5 +9,5 @@ clean_openblas:
 	rm -rf include;	rm -rf lib; cd OpenBLAS; make clean; cd ..;
 
 clean:
-	rm -rf *.c; rm -rf build;
+	rm -rf blasy/*.c blasy/*.so; rm -rf build;
 

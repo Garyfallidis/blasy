@@ -1,5 +1,5 @@
 import numpy as np
-from openblas import dgemm, ddot
+from blasy.cblas import dgemm, ddot
 from time import time
 """
 For OpenBlas

@@ -15,11 +15,13 @@ include_dirs = [pjoin(dname, 'include'), np.get_include()]
 library_dirs = [pjoin(dname, 'lib')]
 
 ext_modules=[ 
-    Extension('blasy.openblas',
-              [pjoin('blasy','openblas.pyx')], 
-              extra_objects=[pjoin(dname, 'lib', 'libopenblas.a')],
+    Extension('blasy.cblas',
+              [pjoin('blasy','cblas.pyx')], 
+              #extra_objects=[pjoin(dname, 'lib', 'libopenblas.a')],
               library_dirs=library_dirs,
-              include_dirs=include_dirs)
+              include_dirs=include_dirs,
+              extra_link_args=['-lopenblas'],
+              runtime_library_dirs=library_dirs)
 ]
 
 setup(

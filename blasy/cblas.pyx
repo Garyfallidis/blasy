@@ -1,4 +1,4 @@
-cimport openblas
+cimport cblas
 
 
 #Level 1

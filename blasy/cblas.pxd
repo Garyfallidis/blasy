@@ -24,6 +24,17 @@ cdef extern from "cblas.h" nogil:
                       double *y, 
                       blasint incy)
 
+    void cblas_dger(CBLAS_ORDER order, 
+                    const blasint M, 
+                    const blasint N, 
+                    const double alpha, 
+                    const double *x, 
+                    const blasint incx, 
+                    const double *y, 
+                    const blasint incy, 
+                    double *A, 
+                    const blasint lda)
+
     # Level 2
 
 
@@ -43,3 +54,4 @@ cdef extern from "cblas.h" nogil:
                      double *C, 
                      blasint ldc)
 
+    
