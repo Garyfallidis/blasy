@@ -46,3 +46,10 @@ def test_dger():
 
     dger(x, y, A)
     assert_array_almost_equal(A, np.dot(x[:, None], y[None, :]))
+
+    x = np.array([0, 1, 2, 3], 'f8')
+    y = np.array([0, 2, 3], 'f8')
+
+    A = np.zeros((4, 3))
+    dger(x, y, A)
+    assert_array_almost_equal(A, np.dot(x[:, None], y[None, :]))

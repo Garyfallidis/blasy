@@ -33,7 +33,7 @@ def dger(double[::1] x, double[::1] y, double[:, ::1] A, double alpha=1, int inc
         int N = A.shape[1]
 
     with nogil:
-        cblas_dger(CblasRowMajor, M, N, alpha, xp, incx, yp, incy, a, M)
+        cblas_dger(CblasRowMajor, M, N, alpha, xp, incx, yp, incy, a, N)
 
 
 #Level 2
