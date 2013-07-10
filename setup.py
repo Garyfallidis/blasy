@@ -14,18 +14,24 @@ dname, filename = os.path.split(fullpath)
 include_dirs = [pjoin(dname, 'include'), np.get_include()]
 library_dirs = [pjoin(dname, 'lib')]
 
-ext_modules=[ 
+ext_modules=[
     Extension('blasy.cblas',
               [pjoin('blasy','cblas.pyx')], 
               #extra_objects=[pjoin(dname, 'lib', 'libopenblas.a')],
               library_dirs=library_dirs,
               include_dirs=include_dirs,
               extra_link_args=['-lopenblas'],
-              runtime_library_dirs=library_dirs)
+              runtime_library_dirs=library_dirs),
+    Extension('blasy.nnet',
+             [pjoin('blasy','nnet.pyx')],
+             library_dirs=library_dirs,
+             include_dirs=include_dirs,
+             extra_link_args=['-lopenblas'],
+             runtime_library_dirs=library_dirs)
 ]
 
 setup(
-  name = 'OpenBLAS wrapping demo',
+  name = 'BLaSy',
   packages = ['blasy'],
   cmdclass = {'build_ext': build_ext},
   ext_modules = ext_modules,

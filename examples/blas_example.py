@@ -42,6 +42,7 @@ if __name__ == '__main__':
     A = np.random.rand(500, 400).astype('f8')
     B = np.random.rand(400, 300).astype('f8')
     C = np.zeros((500, 300), 'f8')
+    C2 = np.zeros((500, 300), 'f8')
 
     times = []
     for i in range(200):
@@ -50,7 +51,7 @@ if __name__ == '__main__':
         t00 = time() - t0
 
         t1 = time()
-        C2 = np.dot(A, B)
+        np.dot(A, B, C2)
         t10 = time() - t1
 
         times.append(t10 / t00)
