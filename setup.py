@@ -20,13 +20,15 @@ ext_modules=[
               #extra_objects=[pjoin(dname, 'lib', 'libopenblas.a')],
               library_dirs=library_dirs,
               include_dirs=include_dirs,
-              extra_link_args=['-lopenblas'],
+              extra_compile_args=['-fopenmp'],    
+              extra_link_args=['-lopenblas', '-fopenmp'],              
               runtime_library_dirs=library_dirs),
     Extension('blasy.nnet',
              [pjoin('blasy','nnet.pyx')],
              library_dirs=library_dirs,
              include_dirs=include_dirs,
-             extra_link_args=['-lopenblas'],
+             extra_compile_args=['-fopenmp'],    
+             extra_link_args=['-lopenblas', '-fopenmp'],
              runtime_library_dirs=library_dirs)
 ]
 
