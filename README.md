@@ -11,7 +11,7 @@ git clone https://github.com/Garyfallidis/blasy.git
 
 cd blasy
 
-make openblas
+make openblas_omp
 
 make ext
 
