@@ -66,11 +66,6 @@ def test_dgelsd():
                   [2.68, -1.71, 3.46],
                   [-9.62, -0.79, 0.41],
                   [0, 0, 0]])
-    # B = np.array([[7.30],
-    #               [1.33],
-    #               [2.68],
-    #               [-9.62],
-    #               [0]])
 
     X_corr = np.array([[-0.69, -0.24, 0.06],
                       [-0.8, -0.08, 0.21],
@@ -82,11 +77,19 @@ def test_dgelsd():
     s = np.zeros(A.shape[0])
 
     info = dgelsd(A, B, s)
-    print(info)
-    
-    # x2 = np.linalg.lstsq(A, B[:-1])[0]
-    # print(B)
-    # print(x2)
 
     assert_array_almost_equal(B, X_corr, 2)
+
+    A = np.random.rand(5, 3)
+    B = np.random.rand(5, 1)
+    s = np.zeros(A.shape[0])
+
+    x = np.linalg.lstsq(A, B)[0]
+
+    info = dgelsd(A, B, s)
+
+    x2 = B[:3]
+
+    assert_array_almost_equal(x, x2)
+
 
