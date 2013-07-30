@@ -1,6 +1,7 @@
 import numpy as np
 from numpy.testing import *
 from blasy.cblas import dgemm, ddot, dgemv, dger
+from blasy.lapacke import dgelsd
 
 
 def test_ddot():
@@ -53,3 +54,39 @@ def test_dger():
     A = np.zeros((4, 3))
     dger(x, y, A)
     assert_array_almost_equal(A, np.dot(x[:, None], y[None, :]))
+
+
+def test_dgelsd():
+    A = np.array([[0.12, -8.19, 7.69, -2.26, -4.71],
+                  [-6.91,  2.22, -5.12, -9.08,  9.96],
+                  [-3.33, -8.94, -6.72, -4.40, -9.98],
+                  [3.97,  3.33, -2.74, -7.92, -3.20]])
+    B = np.array([[7.30,  0.47, -6.28],
+                  [1.33,  6.58, -3.42],
+                  [2.68, -1.71, 3.46],
+                  [-9.62, -0.79, 0.41],
+                  [0, 0, 0]])
+    # B = np.array([[7.30],
+    #               [1.33],
+    #               [2.68],
+    #               [-9.62],
+    #               [0]])
+
+    X_corr = np.array([[-0.69, -0.24, 0.06],
+                      [-0.8, -0.08, 0.21],
+                      [ 0.38, 0.12, -0.65],
+                      [ 0.29, -0.24, 0.42],
+                      [ 0.29, 0.35, -0.30]])
+
+
+    s = np.zeros(A.shape[0])
+
+    info = dgelsd(A, B, s)
+    print(info)
+    
+    # x2 = np.linalg.lstsq(A, B[:-1])[0]
+    # print(B)
+    # print(x2)
+
+    assert_array_almost_equal(B, X_corr, 2)
+
